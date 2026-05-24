@@ -1,23 +1,72 @@
 [
   {
-    "nombre":"Café Fit",
-    "precio":"$0 COP",
-    "categoria":"Control de peso",
-    "imagen":"https://via.placeholder.com/300x300",
-    "link":"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+    "nombre": "Prueba 1",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
   },
   {
-    "nombre":"Nutraday",
-    "precio":"$0 COP",
-    "categoria":"Nutrición",
-    "imagen":"https://via.placeholder.com/300x300",
-    "link":"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+    "nombre": "Prueba 2",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
   },
   {
-    "nombre":"Biopro Fit",
-    "precio":"$0 COP",
-    "categoria":"Bienestar",
-    "imagen":"https://via.placeholder.com/300x300",
-    "link":"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+    "nombre": "Prueba 3",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre": "Prueba 4",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre": "Prueba 5",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre": "Prueba 6",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre": "Prueba 7",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre": "Prueba 8",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre": "Prueba 9",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre": "Prueba 10",
+    "precio": "$100 COP",
+    "categoria": "TEST",
+    "imagen": "https://via.placeholder.com/300",
+    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
   }
 ]
