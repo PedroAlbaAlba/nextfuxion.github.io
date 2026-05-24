@@ -17,12 +17,12 @@ jobs:
           node-version: "20"
 
       - name: Instalar dependencias
-      run: npm install
-      
-      - name: Ejecutar script
-      run: node scripts/update.js
+        run: npm install
 
-      - name: Commit cambios
+      - name: Ejecutar script
+        run: node scripts/update.js
+
+      - name: Guardar cambios
         run: |
           git config --global user.name "NextFuXion Bot"
           git config --global user.email "bot@nextfuxion.local"
