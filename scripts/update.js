@@ -6,18 +6,26 @@ try{
 
 const axios = require("axios");
 
+const url =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products?culture=es-CO";
+
 const respuesta =
 await axios.get(
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products",
+url,
 {
-maxRedirects: 5,
+maxRedirects:0,
+
+validateStatus:
+status =>
+status >=200 &&
+status <400,
 
 headers:{
 Cookie:
 "FuXionSiteCulture=es-CO",
 
-Accept:
-"text/html",
+"Accept-Language":
+"es-CO,es;q=0.9",
 
 "User-Agent":
 "Mozilla/5.0"
@@ -30,10 +38,21 @@ console.log(
 respuesta.status
 );
 
+if(
+respuesta.status===301 ||
+respuesta.status===302
+){
+
 console.log(
-"URL FINAL:",
-respuesta.request.res.responseUrl
+"REDIRECT:",
+respuesta.headers.location
 );
+
+}
+
+if(
+respuesta.data
+){
 
 fs.writeFileSync(
 "pagina.html",
@@ -41,8 +60,10 @@ respuesta.data
 );
 
 console.log(
-"HTML GUARDADO"
+"HTML guardado"
 );
+
+}
 
 process.exit(0);
 
@@ -50,7 +71,7 @@ process.exit(0);
 catch(error){
 
 console.error(
-"ERROR:"
+error.message
 );
 
 if(
@@ -58,15 +79,16 @@ error.response
 ){
 
 console.log(
-"STATUS",
+"STATUS:",
 error.response.status
 );
 
-}
-
 console.log(
-error.message
+"LOCATION:",
+error.response.headers.location
 );
+
+}
 
 process.exit(1);
 
