@@ -1,38 +1,24 @@
-
 async function cargarProductos(){
-
-const res = await fetch("productos.json");
-
-const productos = await res.json();
 
 const contenedor =
 document.getElementById(
 "productos"
 );
 
-if(!contenedor) return;
-
-productos.forEach(p=>{
-
-contenedor.innerHTML += `
+contenedor.innerHTML = `
 <div class="card">
+<h3>Sincronización FuXion Colombia</h3>
 
-<img src="${p.imagen}">
+<p>Pais: Colombia</p>
 
-<h3>${p.nombre}</h3>
+<p>Estado: Preparando conexión</p>
 
-<p>${p.categoria}</p>
-
-<h4>${p.precio}</h4>
-
-<a href="${p.link}">
+<a href="${CONFIG.buyUrl}">
 Comprar
 </a>
 
 </div>
 `;
-
-});
 
 }
 
