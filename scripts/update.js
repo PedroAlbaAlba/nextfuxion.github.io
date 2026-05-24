@@ -1,23 +1,46 @@
 const fs = require("fs");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
-const productos = [
+async function actualizar(){
+
+const url =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
+
+const html =
+await axios.get(
+url,
 {
-nombre:"Café Fit",
-precio:"$0 COP",
-categoria:"Control de peso",
-imagen:"",
-link:
-"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-},
-{
-nombre:"Nutraday",
-precio:"$0 COP",
-categoria:"Nutrición",
-imagen:"",
-link:
-"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+headers:{
+Cookie:
+"FuXionSiteCulture=es-CO"
 }
-];
+}
+);
+
+const $ =
+cheerio.load(
+html.data
+);
+
+console.log(
+"Titulo:",
+$("title").text()
+);
+
+const productos = [];
+
+productos.push({
+nombre:
+"Lectura iniciada",
+precio:
+"$0 COP",
+categoria:
+"Prueba",
+imagen:"",
+link:
+"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+});
 
 fs.writeFileSync(
 "productos.json",
@@ -28,6 +51,6 @@ null,
 )
 );
 
-console.log(
-"productos actualizados"
-);
+}
+
+actualizar();
