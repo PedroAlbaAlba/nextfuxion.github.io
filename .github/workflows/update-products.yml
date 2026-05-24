@@ -4,40 +4,28 @@ on:
   workflow_dispatch:
 
 jobs:
-
   update:
-
-    runs-on:
-      ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - uses:
-      actions/checkout@v4
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-    - uses:
-      actions/setup-node@v4
+      - name: Ejecutar script
+        run: node scripts/update.js
 
-      with:
-        node-version: 20
+      - name: Commit cambios
+        run: |
+          git config --global user.name "NextFuXion Bot"
+          git config --global user.email "bot@nextfuxion.local"
 
-    - name:
-      ejecutar lector
+          git add productos.json
 
-      run: |
-        node scripts/update.js
+          git commit -m "Actualizar catalogo" || echo "Sin cambios"
 
-    - name:
-      guardar
-
-      run: |
-
-        git config --global user.name "NextFuXion"
-
-        git config --global user.email "bot@nextfuxion.local"
-
-        git add productos.json
-
-        git commit -m "catalog update" || echo "sin cambios"
-
-        git push
+          git push
