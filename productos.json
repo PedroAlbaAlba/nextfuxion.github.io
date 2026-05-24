@@ -1,0 +1,23 @@
+[
+  {
+    "nombre":"Café Fit",
+    "precio":"$0 COP",
+    "categoria":"Control de peso",
+    "imagen":"https://via.placeholder.com/300x300",
+    "link":"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre":"Nutraday",
+    "precio":"$0 COP",
+    "categoria":"Nutrición",
+    "imagen":"https://via.placeholder.com/300x300",
+    "link":"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  },
+  {
+    "nombre":"Biopro Fit",
+    "precio":"$0 COP",
+    "categoria":"Bienestar",
+    "imagen":"https://via.placeholder.com/300x300",
+    "link":"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+  }
+]
