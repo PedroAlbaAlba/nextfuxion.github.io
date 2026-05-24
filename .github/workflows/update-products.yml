@@ -1,0 +1,27 @@
+name: Update Products
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Crear archivo temporal
+        run: |
+          echo "[]" > productos.json
+
+      - name: Commit
+        run: |
+          git config --global user.name "NextFuXion Bot"
+          git config --global user.email "bot@nextfuxion.local"
+
+          git add productos.json
+
+          git commit -m "update catalog" || echo "sin cambios"
+
+          git push
