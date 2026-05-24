@@ -1,23 +1,105 @@
 const fs = require("fs");
+const axios = require("axios");
+
+async function actualizar(){
+
+const url =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
+
+const respuesta =
+await axios.get(
+url,
+{
+headers:{
+Cookie:
+"FuXionSiteCulture=es-CO"
+}
+}
+);
+
+const html =
+respuesta.data;
 
 const productos = [];
 
-for(let i=1;i<=10;i++){
+/* imágenes */
+
+const imagenes =
+[
+...html.matchAll(
+/https:\/\/fuxionstorage\.blob\.core\.windows\.net[^"']+/g
+)
+].map(x=>x[0]);
+
+/* nombres */
+
+const nombres =
+[
+...html.matchAll(
+/FUXION[^<\\n]{3,120}/g
+)
+].map(x=>x[0].trim());
+
+/* precios */
+
+const precios =
+[
+...html.matchAll(
+/\$\s*[0-9.,]+/g
+)
+].map(x=>x[0]);
+
+const total =
+Math.min(
+imagenes.length,
+nombres.length
+);
+
+for(
+let i=0;
+i<total;
+i++
+){
 
 productos.push({
 
 nombre:
-"Prueba "+i,
+nombres[i] ||
+"Producto",
 
 precio:
-"$100 COP",
+precios[i] ||
+"$0 COP",
 
 categoria:
-"TEST",
+"FuXion",
 
 imagen:
-"https://via.placeholder.com/300",
+imagenes[i],
 
+link:
+"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+
+});
+
+}
+
+if(
+productos.length===0
+){
+
+productos.push({
+
+nombre:
+"No detectado",
+
+precio:
+"$0 COP",
+
+categoria:
+"Prueba",
+
+imagen:"",
 link:
 "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
 
@@ -35,5 +117,10 @@ null,
 );
 
 console.log(
-"10 productos creados"
+"Productos encontrados:",
+productos.length
 );
+
+}
+
+actualizar();
