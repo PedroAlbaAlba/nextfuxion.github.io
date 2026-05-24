@@ -3,6 +3,9 @@ name: Update Products
 on:
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -11,18 +14,19 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
 
-      - name: Mostrar versión Node
+      - name: Show Node
         run: node -v
 
-      - name: Instalar dependencias
+      - name: Install dependencies
         run: npm install
 
-      - name: Ejecutar lector
+      - name: Run extractor
         run: node scripts/update.js
 
-      - name: Guardar cambios
+      - name: Commit changes
         run: |
           git config user.name "NextFuXion Bot"
           git config user.email "bot@nextfuxion.local"
