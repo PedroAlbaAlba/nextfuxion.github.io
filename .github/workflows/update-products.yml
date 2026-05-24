@@ -16,8 +16,11 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Instalar dependencias
+      run: npm install
+      
       - name: Ejecutar script
-        run: node scripts/update.js
+      run: node scripts/update.js
 
       - name: Commit cambios
         run: |
