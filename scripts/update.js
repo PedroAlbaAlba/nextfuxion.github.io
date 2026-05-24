@@ -37,12 +37,8 @@ if(
 return;
 }
 
-const bloque =
-$(el)
-.closest(
-"div"
-)
-parent = $(el).parent();
+const parent =
+$(el).parent();
 
 const texto =
 parent.text()
