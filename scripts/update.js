@@ -1,86 +1,45 @@
 const fs = require("fs");
 
-async function actualizar(){
+try {
 
-try{
-
-const axios = require("axios");
-
-const url =
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products/390";
-
-const respuesta =
-await axios.get(
-url,
-{
-headers:{
-Cookie:
-"FuXionSiteCulture=es-CO",
-
-"User-Agent":
-"Mozilla/5.0"
-}
-}
+const html = fs.readFileSync(
+"pagina.html",
+"utf8"
 );
 
-const html =
-respuesta.data;
-
-/* imágenes */
-
-const imagenes =
-[
+const imagenes = [
 ...html.matchAll(
 /https:\/\/fuxionstorage\.blob\.core\.windows\.net[^"' ]+/g
 )
-].map(
-x=>x[0]
-);
+].map(x=>x[0]);
 
-/* nombres */
-
-const nombres =
-[
+const nombres = [
 ...html.matchAll(
 /FUXION[^<\n]{3,150}/g
 )
-].map(
-x=>x[0].trim()
-);
+].map(x=>x[0].trim());
 
-/* precios */
-
-const precios =
-[
+const precios = [
 ...html.matchAll(
 /\$\s*[0-9.,]+/g
 )
-].map(
-x=>x[0]
-);
+].map(x=>x[0]);
 
 const productos = [];
 
 const total =
-Math.min(
-imagenes.length,
 Math.max(
-nombres.length,
-1
-)
+imagenes.length,
+nombres.length
 );
 
-for(
-let i=0;
-i<total;
-i++
-){
+for(let i=0;i<total;i++){
 
 productos.push({
 
 nombre:
 nombres[i] ||
-("Producto "+(i+1)),
+`Producto ${i+1}`,
 
 precio:
 precios[i] ||
@@ -90,7 +49,8 @@ categoria:
 "FuXion",
 
 imagen:
-imagenes[i],
+imagenes[i] ||
+"",
 
 link:
 "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
@@ -109,7 +69,7 @@ null,
 );
 
 console.log(
-"PRODUCTOS:",
+"Productos:",
 productos.length
 );
 
@@ -118,14 +78,8 @@ process.exit(0);
 }
 catch(error){
 
-console.error(
-error.message
-);
+console.error(error);
 
 process.exit(1);
 
 }
-
-}
-
-actualizar();
