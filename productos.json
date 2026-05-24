@@ -1,72 +1,9 @@
 [
   {
-    "nombre": "Prueba 1",
+    "nombre": "TEST FUXION",
     "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 2",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 3",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 4",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 5",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 6",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 7",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 8",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 9",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
-    "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-  },
-  {
-    "nombre": "Prueba 10",
-    "precio": "$100 COP",
-    "categoria": "TEST",
-    "imagen": "https://via.placeholder.com/300",
+    "categoria": "PRUEBA",
+    "imagen": "",
     "link": "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
   }
 ]
