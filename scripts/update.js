@@ -4,34 +4,35 @@ async function probar(){
 
 try{
 
-const axios =
-require("axios");
-
-console.log(
-"Iniciando descarga"
-);
+const axios = require("axios");
 
 const respuesta =
 await axios.get(
 "https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products",
 {
+maxRedirects: 5,
+
 headers:{
 Cookie:
 "FuXionSiteCulture=es-CO",
+
+Accept:
+"text/html",
+
 "User-Agent":
 "Mozilla/5.0"
-},
-timeout:30000
+}
 }
 );
 
 console.log(
-"Descarga OK"
+"STATUS:",
+respuesta.status
 );
 
 console.log(
-"Tamaño HTML:",
-respuesta.data.length
+"URL FINAL:",
+respuesta.request.res.responseUrl
 );
 
 fs.writeFileSync(
@@ -40,7 +41,7 @@ respuesta.data
 );
 
 console.log(
-"HTML guardado"
+"HTML GUARDADO"
 );
 
 process.exit(0);
@@ -49,10 +50,21 @@ process.exit(0);
 catch(error){
 
 console.error(
-"ERROR REAL:"
+"ERROR:"
 );
 
-console.error(
+if(
+error.response
+){
+
+console.log(
+"STATUS",
+error.response.status
+);
+
+}
+
+console.log(
 error.message
 );
 
