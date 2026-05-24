@@ -1,12 +1,33 @@
-console.log(
-"Preparando lector FuXion Colombia"
+const fs = require("fs");
+
+const productos = [
+{
+nombre:"Café Fit",
+precio:"$0 COP",
+categoria:"Control de peso",
+imagen:"",
+link:
+"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+},
+{
+nombre:"Nutraday",
+precio:"$0 COP",
+categoria:"Nutrición",
+imagen:"",
+link:
+"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+}
+];
+
+fs.writeFileSync(
+"productos.json",
+JSON.stringify(
+productos,
+null,
+2
+)
 );
 
 console.log(
-"Pais por defecto: es-CO"
-);
-
-console.log(
-"Fuente:",
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products"
+"productos actualizados"
 );
