@@ -1,84 +1,99 @@
 const fs = require("fs");
-const cheerio = require("cheerio");
 
 try {
 
-const html =
-fs.readFileSync(
+const html = fs.readFileSync(
 "./pagina.html",
 "utf8"
 );
 
-const $ =
-cheerio.load(html);
-
 const productos = [];
 
-$(".content-item.shop-product").each((i,el)=>{
+const bloques =
+html.match(
+/<div class="content-item shop-product">[\s\S]*?<\/form>/g
+) || [];
 
-const nombre =
-$(el)
-.find(".nameProduct")
-.text()
-.replace(/\s+/g," ")
-.trim();
+bloques.forEach((bloque,index)=>{
 
-const precio =
-$(el)
-.find(".price.colorTheme")
-.first()
-.text()
-.replace(/\s+/g," ")
-.trim();
+/* nombre */
 
-let imagen =
-$(el)
-.find("img.product-image")
-.attr("src");
+let nombre =
+`Producto ${index+1}`;
 
-const link =
-$(el)
-.find(
-'a[href*="productsdet"]'
-)
-.first()
-.attr("href");
-
-/* corregir imagen local */
-
-if(
-imagen &&
-imagen.startsWith("./pagina_files/")
-){
-
-imagen =
-imagen.replace(
-"./pagina_files/",
-"https://fuxionstorage.blob.core.windows.net/vhdfuxionoffix/newOffix/imageProducts/CO/"
+const nombreMatch =
+bloque.match(
+/<div class="nameProduct">([\s\S]*?)<\/div>/
 );
+
+if(nombreMatch){
+
+nombre =
+nombreMatch[1]
+.replace(/<[^>]+>/g," ")
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+/* precio */
+
+let precio =
+"$0";
+
+const precioMatch =
+bloque.match(
+/<span class="price colorTheme">([\s\S]*?)<\/span>/
+);
+
+if(precioMatch){
+
+precio =
+precioMatch[1]
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+/* imagen */
+
+let imagen = "";
+
+const imgMatch =
+bloque.match(
+/<img[^>]+src="([^"]+)"/
+);
+
+if(imgMatch){
+
+imagen = imgMatch[1];
+
+}
+
+/* link */
+
+let link =
+"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN";
+
+const linkMatch =
+bloque.match(
+/productsdet\?itemcode=\d+/
+);
+
+if(linkMatch){
+
+link =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/" +
+linkMatch[0];
 
 }
 
 productos.push({
-
-nombre:
-nombre ||
-`Producto ${i+1}`,
-
-precio:
-precio ||
-"$0",
-
-categoria:
-"FuXion",
-
-imagen:
-imagen || "",
-
-link:
-link ||
-"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
-
+nombre,
+precio,
+categoria:"FuXion",
+imagen,
+link
 });
 
 });
