@@ -7,14 +7,8 @@ document.getElementById(
 "productos"
 );
 
-if(!contenedor){
-return;
-}
-
 contenedor.innerHTML =
-"<p>Cargando productos...</p>";
-
-try{
+"<p>Cargando...</p>";
 
 const respuesta =
 await fetch(
@@ -28,31 +22,49 @@ mostrarProductos(
 productosGlobal
 );
 
+activarBusqueda();
+
+activarOrden();
+
+}
+
+function precioNumero(p){
+
+return Number(
+String(p.precio)
+.replace("$","")
+.replace(/\./g,"")
+.replace(",",".")
+.replace(/[^\d.]/g,"")
+)||0;
+
+}
+
+function activarBusqueda(){
+
 const buscador =
 document.getElementById(
 "busqueda"
 );
 
-if(buscador){
-
 buscador.addEventListener(
 "input",
-function(e){
+e=>{
 
 const texto =
 e.target.value
 .toLowerCase();
 
-const filtrados =
+const lista =
 productosGlobal.filter(
-p=>
-(p.nombre||"")
+x=>
+x.nombre
 .toLowerCase()
 .includes(texto)
 );
 
 mostrarProductos(
-filtrados
+lista
 );
 
 }
@@ -60,15 +72,52 @@ filtrados
 
 }
 
+function activarOrden(){
+
+const selector =
+document.getElementById(
+"orden"
+);
+
+selector.addEventListener(
+"change",
+e=>{
+
+let copia =
+[
+...productosGlobal
+];
+
+if(
+e.target.value==="asc"
+){
+
+copia.sort(
+(a,b)=>
+precioNumero(a)-
+precioNumero(b)
+);
+
 }
-catch(error){
 
-console.log(error);
+if(
+e.target.value==="desc"
+){
 
-contenedor.innerHTML =
-"<p>Error cargando catálogo</p>";
+copia.sort(
+(a,b)=>
+precioNumero(b)-
+precioNumero(a)
+);
 
 }
+
+mostrarProductos(
+copia
+);
+
+}
+);
 
 }
 
@@ -96,11 +145,9 @@ contenedor.innerHTML += `
 
 <img
 src="${p.imagen}"
-alt="${p.nombre}">
+onclick='abrirDetalle(${JSON.stringify(p)})'>
 
 <h3>${p.nombre}</h3>
-
-<p>${p.categoria||"FuXion"}</p>
 
 <h4>${p.precio}</h4>
 
@@ -117,10 +164,10 @@ Ver producto
 
 <a
 class="btn-buy"
-href="https://wa.me/573002117268?text=${mensaje}"
-target="_blank">
+target="_blank"
+href="https://wa.me/573002117268?text=${mensaje}">
 
-Comprar WhatsApp
+Comprar
 
 </a>
 
@@ -131,6 +178,52 @@ Comprar WhatsApp
 `;
 
 });
+
+}
+
+function abrirDetalle(
+p
+){
+
+document.getElementById(
+"modalContenido"
+).innerHTML=`
+
+<img
+src="${p.imagen}"
+style="
+width:220px;
+max-width:100%;
+">
+
+<h2>${p.nombre}</h2>
+
+<h3>${p.precio}</h3>
+
+<a
+class="btn-buy"
+target="_blank"
+href="https://wa.me/573002117268?text=Hola quiero comprar ${encodeURIComponent(p.nombre)}">
+
+Comprar
+
+</a>
+
+`;
+
+document.getElementById(
+"modal"
+).style.display=
+"flex";
+
+}
+
+function cerrarModal(){
+
+document.getElementById(
+"modal"
+).style.display=
+"none";
 
 }
 
