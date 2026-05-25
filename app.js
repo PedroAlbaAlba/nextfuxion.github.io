@@ -1,16 +1,20 @@
 let productosGlobal = [];
 
-async function cargarProductos() {
+async function cargarProductos(){
 
 const contenedor =
 document.getElementById(
 "productos"
 );
 
+if(!contenedor){
+return;
+}
+
 contenedor.innerHTML =
 "<p>Cargando productos...</p>";
 
-try {
+try{
 
 const respuesta =
 await fetch(
@@ -24,14 +28,12 @@ mostrarProductos(
 productosGlobal
 );
 
-/* activar buscador */
-
 const buscador =
 document.getElementById(
 "busqueda"
 );
 
-if (buscador) {
+if(buscador){
 
 buscador.addEventListener(
 "input",
@@ -43,8 +45,8 @@ e.target.value
 
 const filtrados =
 productosGlobal.filter(
-p =>
-(p.nombre || "")
+p=>
+(p.nombre||"")
 .toLowerCase()
 .includes(texto)
 );
@@ -64,24 +66,22 @@ catch(error){
 console.log(error);
 
 contenedor.innerHTML =
-`
-<p>
-Error cargando catálogo
-</p>
-`;
+"<p>Error cargando catálogo</p>";
 
 }
 
 }
 
-function mostrarProductos(productos){
+function mostrarProductos(
+productos
+){
 
 const contenedor =
 document.getElementById(
 "productos"
 );
 
-contenedor.innerHTML = "";
+contenedor.innerHTML="";
 
 productos.forEach(p=>{
 
@@ -98,17 +98,11 @@ contenedor.innerHTML += `
 src="${p.imagen}"
 alt="${p.nombre}">
 
-<h3>
-${p.nombre}
-</h3>
+<h3>${p.nombre}</h3>
 
-<p>
-${p.categoria || "FuXion"}
-</p>
+<p>${p.categoria||"FuXion"}</p>
 
-<h4>
-${p.precio}
-</h4>
+<h4>${p.precio}</h4>
 
 <div class="card-buttons">
 
