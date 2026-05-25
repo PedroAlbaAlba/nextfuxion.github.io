@@ -155,7 +155,8 @@ onclick='abrirDetalle(${JSON.stringify(p)})'>
 
 <a
 class="btn-view"
-href="${p.link}"
+href="https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products?country=CO"
+onclick="window.open('${p.link}','_blank'); return false;"
 target="_blank">
 
 Ver producto
