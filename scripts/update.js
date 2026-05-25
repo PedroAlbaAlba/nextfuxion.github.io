@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-try{
+try {
 
 const html =
 fs.readFileSync(
@@ -8,64 +8,116 @@ fs.readFileSync(
 "utf8"
 );
 
+const productos = [];
+
+/* buscar cada imagen de producto */
+
+const regexImagen =
+/https:\/\/fuxionstorage\.blob\.core\.windows\.net[^"' ]+/g;
+
 const imagenes =
 [
 ...html.matchAll(
-/https:\/\/fuxionstorage\.blob\.core\.windows\.net[^"' ]+/g
+regexImagen
 )
-].map(x=>x[0]);
+];
 
-const nombres =
-[
-...html.matchAll(
-/FUXION[^<\n]{3,150}/g
-)
-].map(x=>x[0]);
+imagenes.forEach((img,index)=>{
 
-const precios =
-[
-...html.matchAll(
-/\$\s*[0-9.,]+/g
-)
-].map(x=>x[0]);
+const imagen =
+img[0];
 
-const productos = [];
-
-const total =
+const inicio =
 Math.max(
-imagenes.length,
-nombres.length
+0,
+img.index-2000
 );
 
-for(
-let i=0;
-i<total;
-i++
+const fin =
+Math.min(
+html.length,
+img.index+4000
+);
+
+const bloque =
+html.substring(
+inicio,
+fin
+);
+
+/* nombre */
+
+let nombre =
+"Producto "+(index+1);
+
+const nombreMatch =
+bloque.match(
+/FUXION[\sA-Z0-9\-\(\)x\.]{3,150}/i
+);
+
+if(
+nombreMatch
 ){
+
+nombre =
+nombreMatch[0]
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+/* precio */
+
+let precio =
+"$0";
+
+const precioMatch =
+bloque.match(
+/\$\s*[0-9.,]+/
+);
+
+if(
+precioMatch
+){
+
+precio =
+precioMatch[0];
+
+}
+
+/* link detalle */
+
+let link =
+"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN";
+
+const linkMatch =
+bloque.match(
+/productsdet\?itemcode=[0-9]+/
+);
+
+if(
+linkMatch
+){
+
+link =
+"https://ifuxion.com/"
++
+linkMatch[0];
+
+}
 
 productos.push({
 
-nombre:
-nombres[i] ||
-`Producto ${i+1}`,
-
-precio:
-precios[i] ||
-"$0 COP",
-
+nombre,
+precio,
 categoria:
 "FuXion",
-
-imagen:
-imagenes[i] ||
-"",
-
-link:
-"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
+imagen,
+link
 
 });
 
-}
+});
 
 fs.writeFileSync(
 "productos.json",
@@ -84,7 +136,9 @@ productos.length
 }
 catch(error){
 
-console.error(error);
+console.error(
+error
+);
 
 process.exit(1);
 
