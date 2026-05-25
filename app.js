@@ -121,6 +121,31 @@ copia
 
 }
 
+/* ABRIR PRODUCTO FORZANDO COLOMBIA */
+
+function abrirProducto(url){
+
+const catalogoCO =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products/390";
+
+window.open(
+catalogoCO,
+"_blank"
+);
+
+/* pequeña espera */
+
+setTimeout(()=>{
+
+window.open(
+url,
+"_blank"
+);
+
+},1500);
+
+}
+
 function mostrarProductos(
 productos
 ){
@@ -155,9 +180,13 @@ onclick='abrirDetalle(${JSON.stringify(p)})'>
 
 <a
 class="btn-view"
-href="https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products?country=CO"
-onclick="window.open('${p.link}','_blank'); return false;"
-target="_blank">
+href="#"
+onclick="
+abrirProducto(
+'${p.link}'
+);
+return false;
+">
 
 Ver producto
 
