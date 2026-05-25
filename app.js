@@ -1,3 +1,5 @@
+let productosGlobal = [];
+
 async function cargarProductos(){
 
 const contenedor =
@@ -15,12 +17,77 @@ await fetch(
 "productos.json"
 );
 
-const productos =
+productosGlobal =
 await respuesta.json();
 
-contenedor.innerHTML = "";
+mostrarProductos(
+productosGlobal
+);
+
+/* buscador */
+
+const buscador =
+document.getElementById(
+"busqueda"
+);
+
+if(buscador){
+
+buscador.addEventListener(
+"input",
+e=>{
+
+const texto =
+e.target.value
+.toLowerCase();
+
+const filtrados =
+productosGlobal.filter(
+p=>
+p.nombre
+.toLowerCase()
+.includes(texto)
+);
+
+mostrarProductos(
+filtrados
+);
+
+});
+
+}
+
+}
+catch(error){
+
+contenedor.innerHTML =
+`
+<p>
+Error cargando catálogo
+</p>
+`;
+
+}
+
+}
+
+function mostrarProductos(
+productos
+){
+
+const contenedor =
+document.getElementById(
+"productos"
+);
+
+contenedor.innerHTML="";
 
 productos.forEach(p=>{
+
+const mensaje =
+encodeURIComponent(
+`Hola, quiero comprar ${p.nombre} desde NextFuXion.`
+);
 
 contenedor.innerHTML += `
 
@@ -42,9 +109,21 @@ ${p.categoria}
 ${p.precio}
 </h4>
 
+<div class="card-buttons">
+
 <a
+class="btn-view"
 href="${p.link}"
 target="_blank">
+
+Ver producto
+
+</a>
+
+<a
+class="btn-buy"
+target="_blank"
+href="https://wa.me/573002117268?text=${mensaje}">
 
 Comprar
 
@@ -52,19 +131,11 @@ Comprar
 
 </div>
 
+</div>
+
 `;
 
 });
-
-}catch(error){
-
-contenedor.innerHTML = `
-<p>
-Error cargando catálogo
-</p>
-`;
-
-}
 
 }
 
