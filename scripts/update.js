@@ -16,8 +16,6 @@ html.match(
 
 bloques.forEach((bloque,index)=>{
 
-/* nombre */
-
 let nombre =
 `Producto ${index+1}`;
 
@@ -36,10 +34,7 @@ nombreMatch[1]
 
 }
 
-/* precio */
-
-let precio =
-"$0";
+let precio = "$0";
 
 const precioMatch =
 bloque.match(
@@ -55,45 +50,70 @@ precioMatch[1]
 
 }
 
-/* imagen */
+/* IMAGEN */
 
 let imagen = "";
 
 const imgMatch =
 bloque.match(
-/<img[^>]+src="([^"]+)"/
+/src="([^"]+)"/
 );
 
 if(imgMatch){
 
-imagen = imgMatch[1];
+imagen =
+imgMatch[1];
+
+/* convertir imagen local a URL real */
+
+if(
+imagen.startsWith(
+"./pagina_files/"
+)
+){
+
+const archivo =
+imagen.replace(
+"./pagina_files/",
+""
+);
+
+imagen =
+"https://fuxionstorage.blob.core.windows.net/vhdfuxionoffix/newOffix/imageProducts/CO/"
++
+archivo;
 
 }
 
-/* link */
+}
+
+/* LINK */
 
 let link =
 "https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN";
 
-const linkMatch =
+const item =
 bloque.match(
-/productsdet\?itemcode=\d+/
+/itemcode=(\d+)/i
 );
 
-if(linkMatch){
+if(item){
 
 link =
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/" +
-linkMatch[0];
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/productsdet?itemcode="
++
+item[1];
 
 }
 
 productos.push({
+
 nombre,
 precio,
 categoria:"FuXion",
 imagen,
 link
+
 });
 
 });
@@ -108,7 +128,7 @@ null,
 );
 
 console.log(
-"Productos encontrados:",
+"Productos:",
 productos.length
 );
 
