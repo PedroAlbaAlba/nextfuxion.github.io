@@ -1,6 +1,6 @@
 let productosGlobal = [];
 
-async function cargarProductos(){
+async function cargarProductos() {
 
 const contenedor =
 document.getElementById(
@@ -10,11 +10,11 @@ document.getElementById(
 contenedor.innerHTML =
 "<p>Cargando productos...</p>";
 
-try{
+try {
 
 const respuesta =
 await fetch(
-"productos.json"
+"./productos.json"
 );
 
 productosGlobal =
@@ -24,18 +24,18 @@ mostrarProductos(
 productosGlobal
 );
 
-/* buscador */
+/* activar buscador */
 
 const buscador =
 document.getElementById(
 "busqueda"
 );
 
-if(buscador){
+if (buscador) {
 
 buscador.addEventListener(
 "input",
-e=>{
+function(e){
 
 const texto =
 e.target.value
@@ -43,8 +43,8 @@ e.target.value
 
 const filtrados =
 productosGlobal.filter(
-p=>
-p.nombre
+p =>
+(p.nombre || "")
 .toLowerCase()
 .includes(texto)
 );
@@ -53,12 +53,15 @@ mostrarProductos(
 filtrados
 );
 
-});
+}
+);
 
 }
 
 }
 catch(error){
+
+console.log(error);
 
 contenedor.innerHTML =
 `
@@ -71,16 +74,14 @@ Error cargando catálogo
 
 }
 
-function mostrarProductos(
-productos
-){
+function mostrarProductos(productos){
 
 const contenedor =
 document.getElementById(
 "productos"
 );
 
-contenedor.innerHTML="";
+contenedor.innerHTML = "";
 
 productos.forEach(p=>{
 
@@ -102,7 +103,7 @@ ${p.nombre}
 </h3>
 
 <p>
-${p.categoria}
+${p.categoria || "FuXion"}
 </p>
 
 <h4>
@@ -122,10 +123,10 @@ Ver producto
 
 <a
 class="btn-buy"
-target="_blank"
-href="https://wa.me/573002117268?text=${mensaje}">
+href="https://wa.me/573002117268?text=${mensaje}"
+target="_blank">
 
-Comprar
+Comprar WhatsApp
 
 </a>
 
