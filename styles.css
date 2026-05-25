@@ -78,3 +78,43 @@ border-radius:8px;
 }
 text-align:center;
 }
+
+.search{
+width:100%;
+max-width:500px;
+padding:12px;
+margin:20px auto;
+display:block;
+border-radius:10px;
+border:1px solid #d4af37;
+background:#111;
+color:white;
+font-size:16px;
+}
+
+.card-buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
+.card-buttons a{
+text-decoration:none;
+}
+
+.btn-buy{
+background:#d4af37;
+color:black;
+padding:10px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.btn-view{
+background:black;
+color:#d4af37;
+padding:10px;
+border:1px solid #d4af37;
+border-radius:8px;
+}
