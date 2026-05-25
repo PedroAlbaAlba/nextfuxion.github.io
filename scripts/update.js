@@ -1,25 +1,29 @@
 const fs = require("fs");
 
-try {
+try{
 
-const html = fs.readFileSync(
-"pagina.html",
+const html =
+fs.readFileSync(
+"./pagina.html",
 "utf8"
 );
 
-const imagenes = [
+const imagenes =
+[
 ...html.matchAll(
 /https:\/\/fuxionstorage\.blob\.core\.windows\.net[^"' ]+/g
 )
 ].map(x=>x[0]);
 
-const nombres = [
+const nombres =
+[
 ...html.matchAll(
 /FUXION[^<\n]{3,150}/g
 )
-].map(x=>x[0].trim());
+].map(x=>x[0]);
 
-const precios = [
+const precios =
+[
 ...html.matchAll(
 /\$\s*[0-9.,]+/g
 )
@@ -33,7 +37,11 @@ imagenes.length,
 nombres.length
 );
 
-for(let i=0;i<total;i++){
+for(
+let i=0;
+i<total;
+i++
+){
 
 productos.push({
 
@@ -72,8 +80,6 @@ console.log(
 "Productos:",
 productos.length
 );
-
-process.exit(0);
 
 }
 catch(error){
