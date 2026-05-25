@@ -10,6 +10,8 @@ document.getElementById(
 contenedor.innerHTML =
 "<p>Cargando...</p>";
 
+try{
+
 const respuesta =
 await fetch(
 "./productos.json"
@@ -26,16 +28,39 @@ activarBusqueda();
 
 activarOrden();
 
+}catch(error){
+
+contenedor.innerHTML =
+"<p>Error cargando catálogo</p>";
+
+console.error(error);
+
+}
+
 }
 
 function precioNumero(p){
 
 return Number(
-String(p.precio)
-.replace("$","")
-.replace(/\./g,"")
-.replace(",",".")
-.replace(/[^\d.]/g,"")
+String(
+p.precio
+)
+.replace(
+"$",
+""
+)
+.replace(
+/\./g,
+""
+)
+.replace(
+",",
+"."
+)
+.replace(
+/[^\d.]/g,
+""
+)
 )||0;
 
 }
@@ -46,6 +71,8 @@ const buscador =
 document.getElementById(
 "busqueda"
 );
+
+if(!buscador)return;
 
 buscador.addEventListener(
 "input",
@@ -58,9 +85,13 @@ e.target.value
 const lista =
 productosGlobal.filter(
 x=>
+
 x.nombre
 .toLowerCase()
-.includes(texto)
+.includes(
+texto
+)
+
 );
 
 mostrarProductos(
@@ -68,6 +99,7 @@ lista
 );
 
 }
+
 );
 
 }
@@ -78,6 +110,8 @@ const selector =
 document.getElementById(
 "orden"
 );
+
+if(!selector)return;
 
 selector.addEventListener(
 "change",
@@ -94,8 +128,11 @@ e.target.value==="asc"
 
 copia.sort(
 (a,b)=>
-precioNumero(a)-
+
+precioNumero(a)
+-
 precioNumero(b)
+
 );
 
 }
@@ -106,8 +143,11 @@ e.target.value==="desc"
 
 copia.sort(
 (a,b)=>
-precioNumero(b)-
+
+precioNumero(b)
+-
 precioNumero(a)
+
 );
 
 }
@@ -117,32 +157,45 @@ copia
 );
 
 }
+
 );
 
 }
 
-/* ABRIR PRODUCTO FORZANDO COLOMBIA */
+/* ABRIR PRODUCTO */
 
 function abrirProducto(url){
 
-const catalogoCO =
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products/390";
-
+const ventana =
 window.open(
-catalogoCO,
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products/390",
 "_blank"
 );
 
-/* pequeña espera */
+if(!ventana){
+
+alert(
+"El navegador bloqueó la ventana emergente"
+);
+
+return;
+
+}
 
 setTimeout(()=>{
 
-window.open(
-url,
-"_blank"
-);
+try{
 
-},1500);
+ventana.location =
+url;
+
+}catch(e){
+
+console.log(e);
+
+}
+
+},2000);
 
 }
 
@@ -161,7 +214,9 @@ productos.forEach(p=>{
 
 const mensaje =
 encodeURIComponent(
+
 `Hola, quiero comprar ${p.nombre} desde NextFuXion.`
+
 );
 
 contenedor.innerHTML += `
@@ -170,11 +225,20 @@ contenedor.innerHTML += `
 
 <img
 src="${p.imagen}"
+alt="${p.nombre}"
 onclick='abrirDetalle(${JSON.stringify(p)})'>
 
-<h3>${p.nombre}</h3>
+<h3>
 
-<h4>${p.precio}</h4>
+${p.nombre}
+
+</h3>
+
+<h4>
+
+${p.precio}
+
+</h4>
 
 <div class="card-buttons">
 
@@ -217,18 +281,29 @@ p
 
 document.getElementById(
 "modalContenido"
-).innerHTML=`
+).innerHTML = `
 
 <img
 src="${p.imagen}"
 style="
 width:220px;
 max-width:100%;
+border-radius:12px;
 ">
 
-<h2>${p.nombre}</h2>
+<h2>
 
-<h3>${p.precio}</h3>
+${p.nombre}
+
+</h2>
+
+<h3>
+
+${p.precio}
+
+</h3>
+
+<br>
 
 <a
 class="btn-buy"
@@ -243,7 +318,7 @@ Comprar
 
 document.getElementById(
 "modal"
-).style.display=
+).style.display =
 "flex";
 
 }
@@ -252,9 +327,27 @@ function cerrarModal(){
 
 document.getElementById(
 "modal"
-).style.display=
+).style.display =
 "none";
 
 }
+
+window.onclick =
+function(e){
+
+const modal =
+document.getElementById(
+"modal"
+);
+
+if(
+e.target===modal
+){
+
+cerrarModal();
+
+}
+
+};
 
 cargarProductos();
