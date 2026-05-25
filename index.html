@@ -1,15 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>NextFuXion</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
+<title>
+NextFuXion
+</title>
+
+<link rel="stylesheet"
+href="styles.css">
+
 <script src="config.js"></script>
+
 </head>
+
 <body>
 
 <header class="hero">
@@ -20,19 +29,27 @@ class="logo"
 alt="NextFuXion">
 
 <p class="subtitle">
+
 Bienestar • Energía • Transformación
+
 </p>
 
 <div class="buttons">
 
-<a class="buy"
+<a
+class="buy"
 href="https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN">
+
 Comprar productos
+
 </a>
 
-<a class="whatsapp"
+<a
+class="whatsapp"
 href="https://wa.me/573002117268?text=Hola,%20quiero%20comprar%20productos%20FuXion%20desde%20NextFuXion.">
+
 WhatsApp
+
 </a>
 
 </div>
@@ -42,8 +59,12 @@ WhatsApp
 <section class="catalog">
 
 <h2>
+
 Catálogo FuXion
+
 </h2>
+
+<div class="barra-superior">
 
 <input
 id="busqueda"
@@ -51,31 +72,39 @@ type="text"
 placeholder="Buscar productos..."
 class="search">
 
+<select
+id="orden"
+class="orden">
+
+<option value="">
+
+Ordenar precio
+
+</option>
+
+<option value="asc">
+
+Menor a mayor
+
+</option>
+
+<option value="desc">
+
+Mayor a menor
+
+</option>
+
+</select>
+
+</div>
+
 <div id="productos">
 
 </div>
 
 </section>
-  
-<select
-id="orden"
-class="search">
 
-<option value="">
-Ordenar precio
-</option>
-
-<option value="asc">
-Menor a mayor
-</option>
-
-<option value="desc">
-Mayor a menor
-</option>
-
-</select>
-<script src="app.js"></script>
-  <div
+<div
 id="modal"
 class="modal">
 
@@ -96,5 +125,8 @@ X
 
 </div>
 
+<script src="app.js"></script>
+
 </body>
+
 </html>
