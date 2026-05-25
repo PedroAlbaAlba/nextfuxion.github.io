@@ -1,143 +1,100 @@
 const fs = require("fs");
+const cheerio = require("cheerio");
 
 try {
 
-const html = fs.readFileSync(
+const html =
+fs.readFileSync(
 "./pagina.html",
 "utf8"
 );
 
+const $ =
+cheerio.load(html);
+
 const productos = [];
 
-const regexImagen =
-/https:\/\/fuxionstorage\.blob\.core\.windows\.net[^"' ]+/g;
+$(".content-item.shop-product").each((i,el)=>{
 
-const imagenes = [
-...html.matchAll(regexImagen)
-];
-
-imagenes.forEach((img,index)=>{
-
-const imagen = img[0];
-
-/* bloque cercano a la imagen */
-
-const inicio =
-Math.max(
-0,
-img.index - 5000
-);
-
-const fin =
-Math.min(
-html.length,
-img.index + 8000
-);
-
-const bloque =
-html.substring(
-inicio,
-fin
-);
-
-/* nombre real */
-
-let nombre =
-`Producto ${index+1}`;
-
-const nombres = [
-...bloque.matchAll(
-/FUXION\s+[A-Z0-9\s\-\(\)x\.]{4,150}/gi
-)
-];
-
-if(
-nombres.length>0
-){
-
-nombre =
-nombres[0][0]
+const nombre =
+$(el)
+.find(".nameProduct")
+.text()
 .replace(/\s+/g," ")
 .trim();
 
-}
+const precio =
+$(el)
+.find(".price.colorTheme")
+.first()
+.text()
+.replace(/\s+/g," ")
+.trim();
 
-/* precio */
+let imagen =
+$(el)
+.find("img.product-image")
+.attr("src");
 
-let precio =
-"Sin precio";
-
-const precios = [
-...bloque.matchAll(
-/\$\s*[0-9]+(?:[.,][0-9]+)?/g
+const link =
+$(el)
+.find(
+'a[href*="productsdet"]'
 )
-];
+.first()
+.attr("href");
+
+/* corregir imagen local */
 
 if(
-precios.length>0
+imagen &&
+imagen.startsWith("./pagina_files/")
 ){
 
-precio =
-precios[0][0];
-
-}
-
-/* itemcode */
-
-let link =
-"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN";
-
-const item =
-bloque.match(
-/productsdet\?itemcode=\d+/i
+imagen =
+imagen.replace(
+"./pagina_files/",
+"https://fuxionstorage.blob.core.windows.net/vhdfuxionoffix/newOffix/imageProducts/CO/"
 );
-
-if(item){
-
-link =
-"https://ifuxion.com/" +
-item[0];
 
 }
 
 productos.push({
 
-nombre,
-precio,
-categoria:"FuXion",
-imagen,
-link
+nombre:
+nombre ||
+`Producto ${i+1}`,
+
+precio:
+precio ||
+"$0",
+
+categoria:
+"FuXion",
+
+imagen:
+imagen || "",
+
+link:
+link ||
+"https://ifuxion.com/GIOVANNAASTRIDRANGELFARFAN"
 
 });
 
 });
-
-/* eliminar duplicados */
-
-const unicos =
-Array.from(
-new Map(
-productos.map(
-p=>[
-p.imagen,
-p
-]
-)
-).values()
-);
 
 fs.writeFileSync(
 "productos.json",
 JSON.stringify(
-unicos,
+productos,
 null,
 2
 )
 );
 
 console.log(
-"Productos:",
-unicos.length
+"Productos encontrados:",
+productos.length
 );
 
 }
