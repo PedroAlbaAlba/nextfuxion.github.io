@@ -227,7 +227,7 @@ ${p.precio}
 
 <a
 class="btn-view"
-href="./redirect.html?item=${p.codigo}"
+href="./redirect.html?url=${encodeURIComponent(p.link)}"
 target="_blank"
 return false;
 ">
