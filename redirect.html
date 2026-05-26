@@ -8,9 +8,11 @@
 
 <body>
 
-<p>Cargando configuración Colombia...</p>
+<p>Cargando producto...</p>
 
 <script>
+
+async function iniciar(){
 
 const params =
 new URLSearchParams(
@@ -24,23 +26,9 @@ params.get(
 )
 );
 
-/* guardar producto */
-
-sessionStorage.setItem(
-"nextfuxion_producto",
-producto
-);
-
-/* abrir primero catálogo */
-
-window.location =
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
-
-setTimeout(async()=>{
-
 try{
 
-/* obtener token */
+/* obtener catálogo */
 
 const pagina =
 await fetch(
@@ -53,7 +41,7 @@ credentials:"include"
 const html =
 await pagina.text();
 
-/* buscar token */
+/* extraer token */
 
 const match =
 html.match(
@@ -82,27 +70,35 @@ token
 
 body:
 JSON.stringify({
-country:"login"
+country:"CO"
 })
 
 }
 );
 
+}
+
+/* abrir producto */
+
 window.location =
 producto;
-
-}
 
 }catch(e){
 
-console.log(e);
+console.log(
+e
+);
+
+/* abrir igual */
 
 window.location =
 producto;
 
 }
 
-},2000);
+}
+
+iniciar();
 
 </script>
 
