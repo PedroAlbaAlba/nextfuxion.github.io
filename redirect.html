@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Redirigiendo...</title>
+
+<title>
+Redirigiendo...
+</title>
+
 </head>
 
 <body>
 
 <p>
-Cargando producto...
+Abriendo producto...
 </p>
 
 <script>
@@ -18,29 +24,33 @@ new URLSearchParams(
 window.location.search
 );
 
+/* obtenemos el link completo */
+
 const link =
-decodeURIComponent(
 params.get(
 "url"
-)
 );
 
-/*
-Abrimos primero catálogo
-para que cargue sesión
-*/
+if(
+link
+){
+
+/* ir directamente al producto */
 
 window.location =
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
+decodeURIComponent(
+link
+);
 
-setTimeout(()=>{
+}else{
 
-window.location =
-link;
+document.body.innerHTML =
+"<h2>No se recibió producto</h2>";
 
-},2500);
+}
 
 </script>
 
 </body>
+
 </html>
