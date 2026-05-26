@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
-<title>Preparando producto...</title>
+<title>Configurando Colombia...</title>
 </head>
 
 <body>
 
-<p>Cargando producto...</p>
+<p>Preparando producto...</p>
+
+<form id="frm"
+action="https://ifuxion.com/giovannaastridrangelfarfan/enrollment/enrollmentconfigurationlittle"
+method="POST"
+target="fuxionFrame">
+
+<input
+type="hidden"
+name="country"
+value="CO">
+
+</form>
+
+<iframe
+name="fuxionFrame"
+style="display:none">
+</iframe>
 
 <script>
-
-async function iniciar(){
 
 const params =
 new URLSearchParams(
@@ -26,82 +40,24 @@ params.get(
 )
 );
 
-try{
+/* ejecutar cambio país */
 
-/* obtener catálogo */
+document
+.getElementById(
+"frm"
+)
+.submit();
 
-const pagina =
-await fetch(
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products",
-{
-credentials:"include"
-}
-);
+/* esperar */
 
-const html =
-await pagina.text();
-
-/* extraer token */
-
-const match =
-html.match(
-/name="__RequestVerificationToken".*?value="([^"]+)"/
-);
-
-if(match){
-
-const token =
-match[1];
-
-await fetch(
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/enrollmentconfigurationlittle",
-{
-method:"POST",
-
-credentials:"include",
-
-headers:{
-"Content-Type":
-"application/json;charset=utf-8",
-
-"__RequestVerificationToken":
-token
-},
-
-body:
-JSON.stringify({
-country:"CO"
-})
-
-}
-);
-
-}
-
-/* abrir producto */
+setTimeout(()=>{
 
 window.location =
 producto;
 
-}catch(e){
-
-console.log(
-e
-);
-
-/* abrir igual */
-
-window.location =
-producto;
-
-}
-
-}
-
-iniciar();
+},3000);
 
 </script>
 
 </body>
-
 </html>
