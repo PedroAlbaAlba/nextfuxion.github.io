@@ -218,8 +218,8 @@ ${p.precio}
 
 <a
 class="btn-view"
-href="https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products"
-target="_blank">
+href="#"
+onclick="verProducto('${p.link}')">
 
 Ver producto
 
@@ -354,3 +354,46 @@ cerrarModal();
 };
 
 cargarProductos();
+async function verProducto(url){
+
+try{
+
+const codigo =
+url
+.split(
+"itemcode="
+)[1];
+
+const respuesta =
+await fetch(
+
+`./api/producto?itemcode=${codigo}`
+
+);
+
+const html =
+await respuesta.text();
+
+document.getElementById(
+"modalContenido"
+).innerHTML =
+html;
+
+document.getElementById(
+"modal"
+).style.display =
+"flex";
+
+}catch(error){
+
+console.log(
+error
+);
+
+alert(
+"No se pudo cargar el producto"
+);
+
+}
+
+}
