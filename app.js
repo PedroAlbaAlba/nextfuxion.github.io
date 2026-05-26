@@ -33,7 +33,9 @@ activarOrden();
 contenedor.innerHTML =
 "<p>Error cargando catálogo</p>";
 
-console.log(error);
+console.log(
+error
+);
 
 }
 
@@ -47,13 +49,25 @@ String(
 p.precio
 )
 
-.replace("$","")
+.replace(
+"$",
+""
+)
 
-.replace(/\./g,"")
+.replace(
+/\./g,
+""
+)
 
-.replace(",", ".")
+.replace(
+",",
+"."
+)
 
-.replace(/[^\d.]/g,"")
+.replace(
+/[^\d.]/g,
+""
+)
 
 )||0;
 
@@ -70,6 +84,7 @@ if(!buscador)return;
 
 buscador.addEventListener(
 "input",
+
 e=>{
 
 const texto =
@@ -82,7 +97,9 @@ x=>
 
 x.nombre
 .toLowerCase()
-.includes(texto)
+.includes(
+texto
+)
 
 );
 
@@ -107,6 +124,7 @@ if(!selector)return;
 
 selector.addEventListener(
 "change",
+
 e=>{
 
 let copia =
@@ -122,9 +140,7 @@ copia.sort(
 (a,b)=>
 
 precioNumero(a)
-
 -
-
 precioNumero(b)
 
 );
@@ -139,9 +155,7 @@ copia.sort(
 (a,b)=>
 
 precioNumero(b)
-
 -
-
 precioNumero(a)
 
 );
@@ -169,11 +183,14 @@ document.getElementById(
 
 contenedor.innerHTML="";
 
-productos.forEach(p=>{
+productos.forEach(
+p=>{
 
 const mensaje =
 encodeURIComponent(
+
 `Hola, quiero comprar ${p.nombre} desde NextFuXion.`
+
 );
 
 contenedor.innerHTML += `
@@ -208,10 +225,6 @@ Ver producto
 
 </a>
 
-Ver producto
-
-</a>
-
 <a
 class="btn-buy"
 target="_blank"
@@ -223,11 +236,27 @@ Comprar
 
 </div>
 
+<p style="
+font-size:12px;
+margin-top:10px;
+color:#aaa;
+">
+
+Buscar en FuXion:
+
+<br>
+
+${p.nombre}
+
+</p>
+
 </div>
 
 `;
 
-});
+}
+
+);
 
 }
 
@@ -241,6 +270,7 @@ document.getElementById(
 
 <img
 src="${p.imagen}"
+
 style="
 width:220px;
 max-width:100%;
@@ -261,9 +291,26 @@ ${p.precio}
 
 <br>
 
+<p>
+
+Buscar este nombre en FuXion:
+
+<br><br>
+
+<strong>
+
+${p.nombre}
+
+</strong>
+
+</p>
+
+<br>
+
 <a
 class="btn-buy"
 target="_blank"
+
 href="https://wa.me/573002117268?text=Hola quiero comprar ${encodeURIComponent(p.nombre)}">
 
 Comprar
@@ -307,69 +354,3 @@ cerrarModal();
 };
 
 cargarProductos();
-function abrirProducto(url){
-
-/* abrir catálogo Fuxion */
-
-const ventana =
-window.open(
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products",
-"_blank"
-);
-
-if(!ventana)return;
-
-/* esperar carga */
-
-const revisar = setInterval(()=>{
-
-try{
-
-const cookies =
-ventana.document.cookie;
-
-/* si ya cambió a CO */
-
-if(
-cookies.includes(
-"FuXionCountry=CO"
-)
-||
-cookies.includes(
-"FuXionSiteCulture=es-CO"
-)
-){
-
-clearInterval(
-revisar
-);
-
-ventana.location =
-url;
-
-}
-
-}catch(e){
-
-/* ignorar mientras carga */
-
-}
-
-},1000);
-
-/* seguridad */
-
-setTimeout(()=>{
-
-clearInterval(
-revisar
-);
-
-/* abrir igual */
-
-ventana.location =
-url;
-
-},15000);
-
-}
