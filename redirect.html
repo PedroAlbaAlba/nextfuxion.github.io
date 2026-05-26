@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Redirigiendo</title>
+</head>
+
+<body>
+
+<p>Preparando producto...</p>
+
+<script>
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const url =
+decodeURIComponent(
+params.get(
+"url"
+)
+);
+
+/* guardar producto */
+
+sessionStorage.setItem(
+"productoFuxion",
+url
+);
+
+/* crear cookie */
+
+document.cookie =
+"FuXionSiteCulture=es-CO; path=/";
+
+/* ir a Fuxion */
+
+window.location =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
+
+</script>
+
+</body>
+
+</html>
