@@ -164,23 +164,6 @@ copia
 
 /* ABRIR PRODUCTO */
 
-function abrirProducto(url){
-
-const ventana =
-window.open(
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products/390",
-"_blank"
-);
-
-if(!ventana){
-
-alert(
-"El navegador bloqueó la ventana emergente"
-);
-
-return;
-
-}
 
 setTimeout(()=>{
 
@@ -244,11 +227,8 @@ ${p.precio}
 
 <a
 class="btn-view"
-href="#"
-onclick="
-abrirProducto(
-'${p.link}'
-);
+href="./redirect.html?item=${p.codigo}"
+target="_blank"
 return false;
 ">
 
