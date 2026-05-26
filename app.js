@@ -201,8 +201,8 @@ ${p.precio}
 
 <a
 class="btn-view"
-href="#"
-onclick="abrirProducto('${p.link}');return false;">
+href="./redirect.html?url=${encodeURIComponent(p.link)}"
+target="_blank">
 
 Ver producto
 
