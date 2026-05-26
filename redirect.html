@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Redirigiendo...</title>
+</head>
+
+<body>
+
+<p>Cargando producto...</p>
+
+<script>
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const item =
+params.get(
+"item"
+);
+
+const catalogoCO =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
+
+window.location =
+catalogoCO;
+
+setTimeout(()=>{
+
+window.location =
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/productsdet?itemcode="
++
+item;
+
+},2500);
+
+</script>
+
+</body>
+</html>
