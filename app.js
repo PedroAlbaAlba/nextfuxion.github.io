@@ -201,7 +201,7 @@ ${p.precio}
 
 <a
 class="btn-view"
-href="./redirect.html?url=${encodeURIComponent(p.link)}"
+href="https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products"
 target="_blank">
 
 Ver producto
