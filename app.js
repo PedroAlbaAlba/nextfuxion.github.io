@@ -201,8 +201,12 @@ ${p.precio}
 
 <a
 class="btn-view"
-href="./redirect.html?url=${encodeURIComponent(p.link)}"
-target="_blank">
+href="#"
+onclick="abrirProducto('${p.link}');return false;">
+
+Ver producto
+
+</a>
 
 Ver producto
 
@@ -303,3 +307,69 @@ cerrarModal();
 };
 
 cargarProductos();
+function abrirProducto(url){
+
+/* abrir catálogo Fuxion */
+
+const ventana =
+window.open(
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products",
+"_blank"
+);
+
+if(!ventana)return;
+
+/* esperar carga */
+
+const revisar = setInterval(()=>{
+
+try{
+
+const cookies =
+ventana.document.cookie;
+
+/* si ya cambió a CO */
+
+if(
+cookies.includes(
+"FuXionCountry=CO"
+)
+||
+cookies.includes(
+"FuXionSiteCulture=es-CO"
+)
+){
+
+clearInterval(
+revisar
+);
+
+ventana.location =
+url;
+
+}
+
+}catch(e){
+
+/* ignorar mientras carga */
+
+}
+
+},1000);
+
+/* seguridad */
+
+setTimeout(()=>{
+
+clearInterval(
+revisar
+);
+
+/* abrir igual */
+
+ventana.location =
+url;
+
+},15000);
+
+}
