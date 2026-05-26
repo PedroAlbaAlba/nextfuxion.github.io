@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>Redirigiendo...</title>
@@ -7,7 +7,9 @@
 
 <body>
 
-<p>Cargando producto...</p>
+<p>
+Cargando producto...
+</p>
 
 <script>
 
@@ -16,23 +18,25 @@ new URLSearchParams(
 window.location.search
 );
 
-const item =
+const link =
+decodeURIComponent(
 params.get(
-"item"
+"url"
+)
 );
 
-const catalogoCO =
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
+/*
+Abrimos primero catálogo
+para que cargue sesión
+*/
 
 window.location =
-catalogoCO;
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
 
 setTimeout(()=>{
 
 window.location =
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/productsdet?itemcode="
-+
-item;
+link;
 
 },2500);
 
