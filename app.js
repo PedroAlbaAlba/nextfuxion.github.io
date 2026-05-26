@@ -33,7 +33,7 @@ activarOrden();
 contenedor.innerHTML =
 "<p>Error cargando catálogo</p>";
 
-console.error(error);
+console.log(error);
 
 }
 
@@ -42,25 +42,19 @@ console.error(error);
 function precioNumero(p){
 
 return Number(
+
 String(
 p.precio
 )
-.replace(
-"$",
-""
-)
-.replace(
-/\./g,
-""
-)
-.replace(
-",",
-"."
-)
-.replace(
-/[^\d.]/g,
-""
-)
+
+.replace("$","")
+
+.replace(/\./g,"")
+
+.replace(",", ".")
+
+.replace(/[^\d.]/g,"")
+
 )||0;
 
 }
@@ -88,9 +82,7 @@ x=>
 
 x.nombre
 .toLowerCase()
-.includes(
-texto
-)
+.includes(texto)
 
 );
 
@@ -130,7 +122,9 @@ copia.sort(
 (a,b)=>
 
 precioNumero(a)
+
 -
+
 precioNumero(b)
 
 );
@@ -145,7 +139,9 @@ copia.sort(
 (a,b)=>
 
 precioNumero(b)
+
 -
+
 precioNumero(a)
 
 );
@@ -159,26 +155,6 @@ copia
 }
 
 );
-
-}
-
-/* ABRIR PRODUCTO */
-
-
-setTimeout(()=>{
-
-try{
-
-ventana.location =
-url;
-
-}catch(e){
-
-console.log(e);
-
-}
-
-},2000);
 
 }
 
@@ -197,9 +173,7 @@ productos.forEach(p=>{
 
 const mensaje =
 encodeURIComponent(
-
 `Hola, quiero comprar ${p.nombre} desde NextFuXion.`
-
 );
 
 contenedor.innerHTML += `
@@ -228,9 +202,7 @@ ${p.precio}
 <a
 class="btn-view"
 href="./redirect.html?url=${encodeURIComponent(p.link)}"
-target="_blank"
-return false;
-">
+target="_blank">
 
 Ver producto
 
