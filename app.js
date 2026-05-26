@@ -219,7 +219,12 @@ ${p.precio}
 <a
 class="btn-view"
 href="#"
-onclick="verProducto('${p.link}')">
+onclick="
+verProducto(
+'${p.link}'
+);
+return false;
+">
 
 Ver producto
 
@@ -395,5 +400,21 @@ alert(
 );
 
 }
+
+}
+function verProducto(link){
+
+const codigo =
+link.split(
+"itemcode="
+)[1];
+
+window.open(
+
+`https://nextfuxion-api.pedroa-alba.workers.dev/?itemcode=${codigo}`,
+
+"_blank"
+
+);
 
 }
