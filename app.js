@@ -201,8 +201,8 @@ ${p.precio}
 
 <a
 class="btn-view"
-href="#"
-onclick="abrirProducto('${p.link}');return false;">
+href="./redirect.html?url=${encodeURIComponent(p.link)}"
+target="_blank">
 
 Ver producto
 
@@ -303,31 +303,3 @@ cerrarModal();
 };
 
 cargarProductos();
-function abrirProducto(url){
-
-const ventana =
-window.open(
-"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products",
-"_blank"
-);
-
-if(!ventana){
-
-alert(
-"Ventana bloqueada"
-);
-
-return;
-
-}
-
-/* esperar que cargue la sesión */
-
-setTimeout(()=>{
-
-ventana.location =
-url;
-
-},5000);
-
-}
