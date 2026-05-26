@@ -3,12 +3,12 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Redirigiendo</title>
+<title>Preparando producto...</title>
 </head>
 
 <body>
 
-<p>Preparando producto...</p>
+<p>Cargando configuración Colombia...</p>
 
 <script>
 
@@ -17,7 +17,7 @@ new URLSearchParams(
 window.location.search
 );
 
-const url =
+const producto =
 decodeURIComponent(
 params.get(
 "url"
@@ -27,19 +27,82 @@ params.get(
 /* guardar producto */
 
 sessionStorage.setItem(
-"productoFuxion",
-url
+"nextfuxion_producto",
+producto
 );
 
-/* crear cookie */
-
-document.cookie =
-"FuXionSiteCulture=es-CO; path=/";
-
-/* ir a Fuxion */
+/* abrir primero catálogo */
 
 window.location =
 "https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products";
+
+setTimeout(async()=>{
+
+try{
+
+/* obtener token */
+
+const pagina =
+await fetch(
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/products",
+{
+credentials:"include"
+}
+);
+
+const html =
+await pagina.text();
+
+/* buscar token */
+
+const match =
+html.match(
+/name="__RequestVerificationToken".*?value="([^"]+)"/
+);
+
+if(match){
+
+const token =
+match[1];
+
+await fetch(
+"https://ifuxion.com/giovannaastridrangelfarfan/enrollment/enrollmentconfigurationlittle",
+{
+method:"POST",
+
+credentials:"include",
+
+headers:{
+"Content-Type":
+"application/json;charset=utf-8",
+
+"__RequestVerificationToken":
+token
+},
+
+body:
+JSON.stringify({
+country:"login"
+})
+
+}
+);
+
+window.location =
+producto;
+
+}
+
+}catch(e){
+
+console.log(e);
+
+window.location =
+producto;
+
+}
+
+},2000);
 
 </script>
 
