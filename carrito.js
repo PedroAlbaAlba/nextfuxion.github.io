@@ -1,7 +1,7 @@
 let carrito =
 JSON.parse(
 localStorage.getItem("carrito")
-)||[];
+) || [];
 
 function precioNumero(precio){
 
@@ -17,7 +17,7 @@ String(precio)
 
 .replace(/[^\d.]/g,"")
 
-)||0;
+) || 0;
 
 }
 
@@ -109,8 +109,7 @@ onclick="eliminar(${index})">
 
 });
 
-contenedor.innerHTML =
-html;
+contenedor.innerHTML = html;
 
 document.getElementById(
 "totalCarrito"
@@ -146,7 +145,7 @@ guardar();
 function restar(i){
 
 if(
-carrito[i].cantidad>1
+carrito[i].cantidad > 1
 ){
 
 carrito[i].cantidad--;
@@ -166,6 +165,29 @@ function eliminar(i){
 carrito.splice(i,1);
 
 guardar();
+
+}
+
+function calcularTotal(){
+
+let total = 0;
+
+carrito.forEach(
+p=>{
+
+const precio =
+precioNumero(
+p.precio
+);
+
+total +=
+precio *
+p.cantidad;
+
+}
+);
+
+return total;
 
 }
 
@@ -201,9 +223,78 @@ document.getElementById(
 "observaciones"
 ).value;
 
+if(
+!nombre ||
+!telefono
+){
+
+alert(
+"Debes ingresar nombre y teléfono."
+);
+
+return;
+
+}
+
+const numeroPedido =
+"NFX-" + Date.now();
+
+const pedido = {
+
+numero:
+numeroPedido,
+
+fecha:
+new Date()
+.toLocaleString(),
+
+estado:
+"Pendiente",
+
+total:
+calcularTotal(),
+
+cliente:{
+
+nombre,
+telefono,
+correo,
+ciudad,
+direccion,
+observaciones
+
+},
+
+productos:
+carrito
+
+};
+
+let pedidos =
+
+JSON.parse(
+localStorage.getItem(
+"pedidos"
+)
+) || [];
+
+pedidos.push(
+pedido
+);
+
+localStorage.setItem(
+
+"pedidos",
+
+JSON.stringify(
+pedidos
+)
+
+);
+
 let mensaje =
 
-`*Pedido NextFuXion*%0A%0A`;
+`*Pedido ${numeroPedido}*%0A%0A`;
 
 mensaje +=
 `Cliente: ${nombre}%0A`;
@@ -230,10 +321,16 @@ carrito.forEach(
 p=>{
 
 mensaje +=
-
 `${p.cantidad} x ${p.nombre}%0A`;
 
 }
+);
+
+mensaje +=
+`%0A*Total:* $${calcularTotal().toLocaleString("es-CO")}`;
+
+localStorage.removeItem(
+"carrito"
 );
 
 window.open(
@@ -244,9 +341,13 @@ window.open(
 
 );
 
-}
+setTimeout(()=>{
 
-cargarCarrito();
+location.reload();
+
+},500);
+
+}
 
 function vaciarCarrito(){
 
@@ -314,7 +415,7 @@ localStorage.getItem(
 
 );
 
-if(!datos)return;
+if(!datos) return;
 
 document.getElementById("nombre").value =
 datos.nombre || "";
@@ -355,11 +456,8 @@ document.getElementById(id);
 if(campo){
 
 campo.addEventListener(
-
 "input",
-
 guardarDatosCliente
-
 );
 
 }
@@ -370,23 +468,4 @@ cargarDatosCliente();
 
 },100);
 
-
-function calcularTotal(){
-
-let total = 0;
-
-carrito.forEach(p=>{
-
-const precio = precioNumero(
-p.precio
-);
-
-total +=
-precio *
-p.cantidad;
-
-});
-
-return total;
-
-}
+cargarCarrito();
