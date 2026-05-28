@@ -213,14 +213,13 @@ Ver producto
 
 </a>
 
-<a
+<button
 class="btn-buy"
-target="_blank"
-href="https://wa.me/573002117268?text=${mensaje}">
+onclick='agregarAlCarrito(${JSON.stringify(p)})'>
 
-Comprar
+🛒 Agregar
 
-</a>
+</button>
 
 </div>
 
