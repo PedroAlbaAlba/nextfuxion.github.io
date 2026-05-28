@@ -367,3 +367,79 @@ alert(
 /* INICIO */
 
 cargarProductos();
+
+/* ==========================
+CARRITO DE COMPRAS
+========================== */
+
+function agregarAlCarrito(producto){
+
+let carrito =
+JSON.parse(
+localStorage.getItem("carrito")
+)||[];
+
+const existente =
+carrito.find(
+p=>p.link===producto.link
+);
+
+if(existente){
+
+existente.cantidad++;
+
+}else{
+
+carrito.push({
+
+nombre:producto.nombre,
+precio:producto.precio,
+imagen:producto.imagen,
+link:producto.link,
+cantidad:1
+
+});
+
+}
+
+localStorage.setItem(
+"carrito",
+JSON.stringify(carrito)
+);
+
+actualizarContador();
+
+alert(
+producto.nombre +
+" agregado al carrito"
+);
+
+}
+
+function actualizarContador(){
+
+const carrito =
+JSON.parse(
+localStorage.getItem("carrito")
+)||[];
+
+const total =
+carrito.reduce(
+(acc,p)=>
+acc+p.cantidad,
+0
+);
+
+const contador =
+document.getElementById(
+"contadorCarrito"
+);
+
+if(contador){
+
+contador.textContent =
+total;
+
+}
+
+}
