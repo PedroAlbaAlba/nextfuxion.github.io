@@ -369,3 +369,24 @@ guardarDatosCliente
 cargarDatosCliente();
 
 },100);
+
+
+function calcularTotal(){
+
+let total = 0;
+
+carrito.forEach(p=>{
+
+const precio = precioNumero(
+p.precio
+);
+
+total +=
+precio *
+p.cantidad;
+
+});
+
+return total;
+
+}
