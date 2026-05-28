@@ -247,3 +247,23 @@ window.open(
 }
 
 cargarCarrito();
+
+function vaciarCarrito(){
+
+if(
+
+confirm(
+"¿Deseas vaciar el carrito?"
+)
+
+){
+
+localStorage.removeItem(
+"carrito"
+);
+
+location.reload();
+
+}
+
+}
