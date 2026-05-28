@@ -331,3 +331,46 @@ transform:scale(1.05);
 transition:.3s;
 
 }
+
+#formCliente{
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+}
+
+#formCliente input,
+#formCliente textarea{
+
+padding:12px;
+
+border-radius:10px;
+
+border:1px solid gold;
+
+background:#111;
+
+color:white;
+
+}
+
+#formCliente textarea{
+
+min-height:120px;
+
+}
+
+.card button{
+
+margin:5px;
+
+padding:8px 12px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
