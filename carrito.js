@@ -74,6 +74,14 @@ ${producto.cantidad}
 
 </p>
 
+<p>
+
+Subtotal:
+
+$${subtotal.toLocaleString("es-CO")}
+
+</p>
+
 <button
 onclick="sumar(${index})">
 
