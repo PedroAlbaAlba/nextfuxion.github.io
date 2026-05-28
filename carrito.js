@@ -267,3 +267,105 @@ location.reload();
 }
 
 }
+
+function guardarDatosCliente(){
+
+const datos = {
+
+nombre:
+document.getElementById("nombre").value,
+
+telefono:
+document.getElementById("telefono").value,
+
+correo:
+document.getElementById("correo").value,
+
+ciudad:
+document.getElementById("ciudad").value,
+
+direccion:
+document.getElementById("direccion").value,
+
+observaciones:
+document.getElementById("observaciones").value
+
+};
+
+localStorage.setItem(
+
+"cliente",
+
+JSON.stringify(datos)
+
+);
+
+}
+
+function cargarDatosCliente(){
+
+const datos =
+
+JSON.parse(
+
+localStorage.getItem(
+"cliente"
+)
+
+);
+
+if(!datos)return;
+
+document.getElementById("nombre").value =
+datos.nombre || "";
+
+document.getElementById("telefono").value =
+datos.telefono || "";
+
+document.getElementById("correo").value =
+datos.correo || "";
+
+document.getElementById("ciudad").value =
+datos.ciudad || "";
+
+document.getElementById("direccion").value =
+datos.direccion || "";
+
+document.getElementById("observaciones").value =
+datos.observaciones || "";
+
+}
+
+setTimeout(()=>{
+
+[
+"nombre",
+"telefono",
+"correo",
+"ciudad",
+"direccion",
+"observaciones"
+]
+
+.forEach(id=>{
+
+const campo =
+document.getElementById(id);
+
+if(campo){
+
+campo.addEventListener(
+
+"input",
+
+guardarDatosCliente
+
+);
+
+}
+
+});
+
+cargarDatosCliente();
+
+},100);
