@@ -368,6 +368,7 @@ alert(
 
 cargarProductos();
 
+actualizarContador();
 /* ==========================
 CARRITO DE COMPRAS
 ========================== */
